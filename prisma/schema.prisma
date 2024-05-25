@@ -7,6 +7,57 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model access_tokens {
+  id            Int      @id @default(autoincrement())
+  user_id       BigInt
+  access_token  String   @db.VarChar(500)
+  refresh_token String   @db.VarChar(500)
+  created_on    DateTime @default(now()) @db.Timestamp(6)
+  expires_on    DateTime @db.Timestamp(6)
+  revoked       Boolean? @default(false)
+}
+
+model categories {
+  id          Int      @id @default(autoincrement())
+  name        String   @db.VarChar(50)
+  props       Json?
+  created_on  DateTime @default(now()) @db.Timestamp(6)
+  created_by  BigInt
+  modified_on DateTime @default(now()) @db.Timestamp(6)
+  modified_by BigInt
+}
+
 model test {
   id Int @id
+}
+
+model user_passwords {
+  id                    Int      @id @default(autoincrement())
+  user_id               BigInt
+  website_name          String   @db.VarChar(255)
+  website_user_name     String   @db.VarChar(255)
+  website_user_password String   @db.VarChar(255)
+  website_logo_link     String?
+  created_on            DateTime @default(now()) @db.Timestamp(6)
+  created_by            BigInt
+  modified_on           DateTime @default(now()) @db.Timestamp(6)
+  modified_by           BigInt
+  category_id           BigInt?
+  is_favorite           Boolean? @default(false)
+  is_deleted            Boolean? @default(false)
+
+  @@index([category_id], map: "idx_user_passwords_category_id")
+  @@index([user_id], map: "idx_user_passwords_user_id")
+}
+
+model users {
+  id            Int      @id @default(autoincrement())
+  email         String   @unique @db.VarChar(255)
+  contact_no    String?  @unique @db.VarChar(20)
+  user_name     String   @unique @db.VarChar(50)
+  created_on    DateTime @default(now()) @db.Timestamp(6)
+  password_hash String   @db.VarChar(255)
+
+  @@index([email], map: "idx_users_email")
+  @@index([user_name], map: "idx_users_user_name")
 }

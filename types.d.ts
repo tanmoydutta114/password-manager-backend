@@ -1,8 +1,6 @@
 declare namespace Express {
 	export interface Request {
-		uid: string;
+		userId: string;
 		email: string;
-		customClaims?: any;
-		globalLogFields?: { [key: string]: string };
 	}
 }

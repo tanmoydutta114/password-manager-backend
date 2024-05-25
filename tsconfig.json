@@ -26,6 +26,7 @@
     "exclude": [
     ],
     "files": [
-      "types.d.ts"
+      "types.d.ts",
+      "credential.json"
     ]
   }

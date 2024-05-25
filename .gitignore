@@ -131,3 +131,6 @@ dist
 
 # powershell file 
 *.ps1
+
+# Credentials JSON
+credential.json
