@@ -22,6 +22,7 @@ CREATE TABLE user_passwords (
     id SERIAL PRIMARY KEY,
     user_id BIGINT NOT NULL,
     website_name VARCHAR(255) NOT NULL,
+    website_link VARCHAR(255) NOT NULL,
     website_user_name VARCHAR(255) NOT NULL,
     website_user_password VARCHAR(255) NOT NULL,
     website_logo_link TEXT,
@@ -32,6 +33,7 @@ CREATE TABLE user_passwords (
     category_id BIGINT,
     is_favorite BOOLEAN DEFAULT FALSE,
     is_deleted BOOLEAN DEFAULT FALSE
+    CONSTRAINT UNQ_website_user_password UNIQUE (user_id, website_link, website_user_name)
 );
 
 CREATE TABLE access_tokens (
@@ -49,5 +51,6 @@ CREATE INDEX idx_users_email ON users(email);
 CREATE INDEX idx_users_user_name ON users(user_name);
 CREATE INDEX idx_user_passwords_user_id ON user_passwords(user_id);
 CREATE INDEX idx_user_passwords_category_id ON user_passwords(category_id);
+CREATE INDEX idx_user_passwords_unique ON user_passwords(user_id, website_link, website_user_name);
 
 

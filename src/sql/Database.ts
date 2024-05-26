@@ -1,4 +1,4 @@
-import { Kysely, PostgresDialect } from 'kysely';
+import { CamelCasePlugin, Kysely, PostgresDialect } from 'kysely';
 import { Pool } from 'pg';
 import config from '../../credential.json';
 import { DB } from '../../prisma/generated/types';
@@ -30,6 +30,7 @@ const dialect = new PostgresDialect({
 
 export function getSQLClient() {
 	return new Kysely<DB>({
-		dialect
+		dialect,
+		plugins: [new CamelCasePlugin()]
 	});
 }

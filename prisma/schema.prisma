@@ -35,6 +35,7 @@ model user_passwords {
   id                    Int      @id @default(autoincrement())
   user_id               BigInt
   website_name          String   @db.VarChar(255)
+  website_link          String   @db.VarChar(255)
   website_user_name     String   @db.VarChar(255)
   website_user_password String   @db.VarChar(255)
   website_logo_link     String?
@@ -46,8 +47,8 @@ model user_passwords {
   is_favorite           Boolean? @default(false)
   is_deleted            Boolean? @default(false)
 
-  @@index([category_id], map: "idx_user_passwords_category_id")
-  @@index([user_id], map: "idx_user_passwords_user_id")
+  @@unique([user_id, website_link, website_user_name], map: "unq_website_user_password")
+  @@index([user_id, website_link, website_user_name], map: "idx_user_passwords_unique")
 }
 
 model users {

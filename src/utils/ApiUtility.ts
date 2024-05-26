@@ -11,7 +11,7 @@ export class ApiUtility {
 		return process.env.RUN_MODE === 'test';
 	}
 
-	static createDate(value?: Date | string | null) {
+	static createDate(value?: Date | string | null): Date {
 		if (!value) {
 			return new Date();
 		}
@@ -20,6 +20,10 @@ export class ApiUtility {
 			return new Date(value.getTime());
 		}
 		return new Date(value);
+	}
+
+	static convertStringToNumber(value: string): number {
+		return parseInt(value);
 	}
 
 	static generateNanoId(length?: number) {

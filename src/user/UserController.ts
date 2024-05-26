@@ -8,8 +8,8 @@ import { UserRepository } from './UserRepository';
 import { CreateUserRequest } from './UserTypes';
 
 export class UserController {
-	static async getUsers(req: Request, res: Response) {
-		const userId = parseInt(req.userId);
+	static async getUser(req: Request, res: Response) {
+		const userId = ApiUtility.convertStringToNumber(req.userId);
 		const { isSuccess, message, user } = await UserRepository.getUser({ userId });
 		if (!isSuccess) {
 			return res.status(HttpStatusCode.NOT_FOUND).send({ isSuccess, message });

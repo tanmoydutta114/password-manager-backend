@@ -29,6 +29,7 @@ export type user_passwords = {
 	id: Generated<number>;
 	user_id: string;
 	website_name: string;
+	website_link: string;
 	website_user_name: string;
 	website_user_password: string;
 	website_logo_link: string | null;
