@@ -5,6 +5,7 @@ import { getSQLClient } from '../sql/Database';
 import { ApiUtility } from '../utils/ApiUtility';
 import { HttpStatusCode } from '../utils/HttpStatusCodes';
 import { StorePasswordRequest, UserPassword, UserPasswordResponseBase, UserPasswordSqlResponse } from './UserPasswordTypes';
+import { EncryptionService } from '../utils/EncryptionService';
 
 export class UserPasswordRepository {
 	static async storePassword(userId: string, storePasswordRequest: StorePasswordRequest): Promise<UserPasswordResponseBase> {
@@ -26,12 +27,13 @@ export class UserPasswordRepository {
 					return response;
 				}
 			}
+			const encryptedUserPassword = await EncryptionService.encrypt(websiteUserPassword, userId);
 
 			const userPassword: InsertObject<DB, 'user_passwords'> = {
 				user_id: userId,
 				website_name: websiteName,
 				website_user_name: websiteUserName,
-				website_user_password: websiteUserPassword,
+				website_user_password: encryptedUserPassword,
 				website_logo_link: websiteLogoLink,
 				website_link: websiteLink,
 				category_id: categoryId,

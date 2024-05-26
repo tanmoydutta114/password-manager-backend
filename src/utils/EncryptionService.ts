@@ -1,8 +1,8 @@
 import * as crypto from 'crypto';
 import config from '../../credential.json';
 
-export class EncryptionDecryption {
-	private static async deriveKey(userId: string): Promise<Buffer> {
+export class EncryptionService {
+	static async deriveKey(userId: string): Promise<Buffer> {
 		return new Promise((resolve, reject) => {
 			const salt = config.ENC_DEC_SALT + userId; // Combine the secret salt with the user ID
 			crypto.pbkdf2(userId, salt, 100000, 32, 'sha256', (err, derivedKey) => {
