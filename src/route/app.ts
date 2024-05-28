@@ -5,9 +5,10 @@ import { UserController } from '../user/UserController';
 import { ZCreateUserRequest } from '../user/UserTypes';
 
 const app = express();
-app.set('PORT', process.env.PORT || 8080);
 
 app.use(cors());
+app.use(express.json());
+
 app.set('port', process.env.PORT || 8080);
 
 app.post(

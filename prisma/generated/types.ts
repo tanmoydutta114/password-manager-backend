@@ -7,9 +7,9 @@ export type Timestamp = ColumnType<Date, Date | string, Date | string>;
 export type access_tokens = {
 	id: Generated<number>;
 	user_id: string;
-	access_token: string;
 	refresh_token: string;
 	created_on: Generated<Timestamp>;
+	modified_on: Generated<Timestamp>;
 	expires_on: Timestamp;
 	revoked: Generated<boolean | null>;
 };

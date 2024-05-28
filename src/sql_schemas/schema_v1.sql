@@ -39,9 +39,9 @@ CREATE TABLE user_passwords (
 CREATE TABLE access_tokens (
     id SERIAL PRIMARY KEY,
     user_id BIGINT NOT NULL,
-    access_token VARCHAR(500) NOT NULL,
     refresh_token VARCHAR(500) NOT NULL,
     created_on TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    modified_on TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     expires_on TIMESTAMP NOT NULL,
     revoked BOOLEAN DEFAULT FALSE
 );
